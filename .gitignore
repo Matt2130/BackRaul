@@ -1,0 +1,35 @@
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+git init
+git remote add origin <repoURL>
+
+git add .
+git commit -m "First commit"
+git branch -M develop // crear rama
+git push origin develop
+ssh-keygen -t rsa -b 4096 -C "manuel.hdz.rubio07@gmail.com"
