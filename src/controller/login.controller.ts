@@ -2,11 +2,21 @@ import { Request, Response } from 'express';
 import { User } from "../models/Alumno";
 import { generateAccessToken } from '../utils/token';
 import { cache } from '../utils/cache';
+import { verifyCaptcha } from './verifyCaptcha.controller';
 import bcrypt from "bcrypt";
 
 export const loginAlumnos = async (req: Request, res: Response) => {
   try {
-    const { matricula, password } = req.body;
+    const { matricula, password, captcha } = req.body;
+
+    if (!captcha) {
+      return res.status(400).json({ message: "Falta el token de reCAPTCHA" });
+    }
+
+    const isHuman = await verifyCaptcha(captcha);
+    if (!isHuman) {
+      return res.status(403).json({ message: "reCAPTCHA inválido. Verifica que no eres un robot." });
+    }
 
     const user = await User.findOne({ matricula });
     if (!user || !(await bcrypt.compare(password, user.password))) {

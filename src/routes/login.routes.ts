@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express";
 import { loginAlumnos, createUser, getAllUsers, getUserByMatricula, deleteUser } from '../controller/login.controller';
+import { loginWithGoogle } from "../controller/loginWithGoogle.controller";
 
 const router = Router();
 
-router.post('/login/alumnos', (req: Request, res: Response) => {
+router.post('/login', (req: Request, res: Response) => {
     loginAlumnos(req, res)
 });
 
@@ -21,6 +22,10 @@ router.get('/getByMatricula/:matricula', (req: Request, res: Response) => {
 
 router.patch('/deleteUser/:matricula', (req: Request, res: Response) => {
     deleteUser(req, res);
+});
+
+router.post('/login-google', (req: Request, res: Response) => {
+    loginWithGoogle(req, res);
 });
 
 export default router;
