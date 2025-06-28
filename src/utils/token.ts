@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 
-const ACCESS_SECRET = "secret1234utd";
+export const ACCESS_SECRET = "secret1234utd";
 
 const timeToLive = 60 * 15; 
 

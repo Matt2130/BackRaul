@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { loginAlumnos, createUser, getAllUsers, getUserByMatricula, deleteUser } from '../controller/login.controller';
 import { loginWithGoogle } from "../controller/loginWithGoogle.controller";
+import { chatSend, getMisMensajes } from "../controller/chat.controller";
 
 const router = Router();
 
@@ -27,5 +28,16 @@ router.patch('/deleteUser/:matricula', (req: Request, res: Response) => {
 router.post('/login-google', (req: Request, res: Response) => {
     loginWithGoogle(req, res);
 });
+
+
+//Chat routes
+router.post('/chatmsj', (req: Request, res: Response) => {
+    chatSend(req, res);
+})
+
+router.get("/chat/misMensajes", (req: Request, res: Response) => {
+    getMisMensajes(req, res);
+});
+
 
 export default router;

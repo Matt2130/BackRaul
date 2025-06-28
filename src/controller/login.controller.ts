@@ -9,14 +9,14 @@ export const loginAlumnos = async (req: Request, res: Response) => {
   try {
     const { matricula, password, captcha } = req.body;
 
-    if (!captcha) {
-      return res.status(400).json({ message: "Falta el token de reCAPTCHA" });
-    }
+  if (!captcha) {
+    return res.status(400).json({ message: "Falta el token de reCAPTCHA" });
+   }
 
-    const isHuman = await verifyCaptcha(captcha);
-    if (!isHuman) {
-      return res.status(403).json({ message: "reCAPTCHA inválido. Verifica que no eres un robot." });
-    }
+   const isHuman = await verifyCaptcha(captcha);
+  if (!isHuman) {
+    return res.status(403).json({ message: "reCAPTCHA inválido. Verifica que no eres un robot." });
+  }
 
     const user = await User.findOne({ matricula });
     if (!user || !(await bcrypt.compare(password, user.password))) {
