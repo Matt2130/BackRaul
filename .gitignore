@@ -26,3 +26,5 @@ build/
 
 # Ignorar archivos .rar
 *.rar
+
+.env
