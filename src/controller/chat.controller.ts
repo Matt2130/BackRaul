@@ -55,13 +55,13 @@ export const getMisMensajes = async (req: Request, res: Response) => {
     return res.status(403).json({ message: "Token inválido o expirado." });
   }
 
-  const emisor = decoded.matriculaId;
+  const receptor = decoded.matriculaId; // El usuario actual es el receptor
 
   try {
-    const mensajes = await Message.find({ emisor });
+    const mensajes = await Message.find({ receptor });
 
     if (mensajes.length === 0) {
-      return res.status(404).json({ message: "No se encontraron mensajes enviados." });
+      return res.status(404).json({ message: "No se encontraron mensajes recibidos." });
     }
 
     return res.status(200).json(mensajes);
